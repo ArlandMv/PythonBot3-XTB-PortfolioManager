@@ -1,0 +1,6 @@
+websocket-client
+requests
+pandas
+openpyxl
+schedule
+pytest
