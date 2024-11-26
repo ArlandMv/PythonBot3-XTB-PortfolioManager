@@ -1,0 +1,43 @@
+name: Python Tests
+
+on:
+  push:
+    branches:
+      - main
+      - feat-logging   # Adjust to match your feature branch name or any other branch you'd like
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Python environment
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Run the tests
+      - name: Run tests with pytest
+        run: |
+          pytest tests --maxfail=1 --disable-warnings -q
+
+      # Optional: Upload test results
+      - name: Upload test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: test-reports/
