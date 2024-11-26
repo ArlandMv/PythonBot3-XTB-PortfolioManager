@@ -1,4 +1,4 @@
-# src/main.py
+# src/main1.py
 from configuration import config_logs
 
 def main():
