@@ -1,2 +1,18 @@
-2024-11-26 16:53:57,209 - xtb_api - INFO - XTB API Logger initialized.
-2024-11-26 16:53:57,209 - xtb_api - ERROR - Test error message from XTB API.
+2024-11-26 21:31:48,110 - xtb_api - INFO - Testing invalid credentials.
+2024-11-26 21:31:48,110 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-26 21:31:49,072 - xtb_api - INFO - Connection established successfully.
+2024-11-26 21:31:49,073 - xtb_api - INFO - Logging in to XTB API.
+2024-11-26 21:31:49,294 - xtb_api - ERROR - Login failed: {'status': False, 'errorCode': 'BE005', 'errorDescr': 'userPasswordCheck: Invalid login or password'}
+2024-11-26 21:31:49,294 - xtb_api - ERROR - Error during login: Login failed.
+2024-11-26 21:31:49,294 - xtb_api - ERROR - Error during invalid credentials test: Login failed.
+2024-11-26 21:31:49,294 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-26 21:31:49,976 - xtb_api - INFO - Connection established successfully.
+2024-11-26 21:31:49,977 - xtb_api - INFO - Logging in to XTB API.
+2024-11-26 21:31:50,223 - xtb_api - INFO - Login successful.
+2024-11-26 21:31:50,223 - xtb_api - INFO - Fetching all symbols with 'currencyPair' set to True.
+2024-11-26 21:31:54,345 - xtb_api - INFO - 70 pairs retrieved: ['CHFNOK', 'NOKSEK', 'EURAUD', 'AUDNZD', 'GBPMXN', 'USDINR', 'GBPSEK', 'GBPJPY', 'USDSEK', 'ZARJPY', 'EURJPY', 'EURMXN', 'CHFPLN', 'USDJPY', 'USDCOP', 'USDILS', 'USDMXN', 'EURZAR', 'AUDJPY', 'GBPCAD', 'GBPNZD', 'AUDCHF', 'NZDUSD', 'EURRON', 'USDZAR', 'NZDCHF', 'EURSEK', 'USDCLP', 'CHFSEK', 'USDSGD', 'NZDSGD', 'CHFJPY', 'GBPAUD', 'GBPCHF', 'EURNOK', 'GBPPLN', 'CADMXN', 'USDCHF', 'CADJPY', 'USDTRY', 'GBPUSD', 'EURCZK', 'EURCNH', 'USDNOK', 'EURCHF', 'USDHUF', 'EURHUF', 'GBPSGD', 'GBPZAR', 'USDTHB', 'AUDUSD', 'USDPLN', 'USDCZK', 'USDCNH', 'EURSGD', 'NZDJPY', 'EURNZD', 'EURCAD', 'EURGBP', 'USDRON', 'EURUSD', 'EURPLN', 'CHFHUF', 'GBPNOK', 'CADCHF', 'EURTRY', 'AUDCAD', 'USDBRL', 'USDCAD', 'NZDCAD']
+2024-11-26 21:31:54,352 - xtb_api - INFO - Currency Pairs: ['CHFNOK', 'NOKSEK', 'EURAUD', 'AUDNZD', 'GBPMXN', 'USDINR', 'GBPSEK', 'GBPJPY', 'USDSEK', 'ZARJPY', 'EURJPY', 'EURMXN', 'CHFPLN', 'USDJPY', 'USDCOP', 'USDILS', 'USDMXN', 'EURZAR', 'AUDJPY', 'GBPCAD', 'GBPNZD', 'AUDCHF', 'NZDUSD', 'EURRON', 'USDZAR', 'NZDCHF', 'EURSEK', 'USDCLP', 'CHFSEK', 'USDSGD', 'NZDSGD', 'CHFJPY', 'GBPAUD', 'GBPCHF', 'EURNOK', 'GBPPLN', 'CADMXN', 'USDCHF', 'CADJPY', 'USDTRY', 'GBPUSD', 'EURCZK', 'EURCNH', 'USDNOK', 'EURCHF', 'USDHUF', 'EURHUF', 'GBPSGD', 'GBPZAR', 'USDTHB', 'AUDUSD', 'USDPLN', 'USDCZK', 'USDCNH', 'EURSGD', 'NZDJPY', 'EURNZD', 'EURCAD', 'EURGBP', 'USDRON', 'EURUSD', 'EURPLN', 'CHFHUF', 'GBPNOK', 'CADCHF', 'EURTRY', 'AUDCAD', 'USDBRL', 'USDCAD', 'NZDCAD']
+2024-11-26 21:31:54,352 - xtb_api - INFO - Fetching data for symbol: USDCLP.
+2024-11-26 21:31:54,571 - xtb_api - INFO - Retrieved data for symbol: USDCLP
+2024-11-26 21:31:54,572 - xtb_api - INFO - USDCLP Data: {'symbol': 'USDCLP', 'currency': 'USD', 'categoryName': 'FX', 'currencyProfit': 'CLP', 'quoteId': 5, 'quoteIdCross': 4, 'marginMode': 101, 'profitMode': 5, 'pipsPrecision': 2, 'contractSize': 100000, 'exemode': 1, 'time': 1732639491659, 'expiration': None, 'stopsLevel': 0, 'precision': 2, 'swapType': 3, 'stepRuleId': 3, 'type': 1102, 'instantMaxVolume': 2147483647, 'groupName': 'Emergings', 'description': 'American Dollar to Chilean Peso', 'longOnly': False, 'trailingEnabled': True, 'marginHedgedStrong': False, 'swapEnable': True, 'percentage': 100.0, 'bid': 977.35, 'ask': 977.92, 'high': 978.47, 'low': 970.65, 'lotMin': 0.01, 'lotMax': 100.0, 'lotStep': 0.01, 'tickSize': 0.01, 'tickValue': 1000.0, 'swapLong': 0.008073, 'swapShort': -0.015009, 'leverage': 5.0, 'spreadRaw': 0.57, 'spreadTable': 57.0, 'starting': None, 'swap_rollover3days': 0, 'marginMaintenance': 0, 'marginHedged': 0, 'initialMargin': 0, 'timeString': 'Tue Nov 26 17:44:51 CET 2024', 'shortSelling': True, 'currencyPair': True}
+2024-11-26 21:31:54,572 - xtb_api - INFO - COMMENTED:Logging out and closing connection

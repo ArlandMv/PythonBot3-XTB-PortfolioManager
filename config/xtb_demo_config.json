@@ -1,0 +1,6 @@
+{
+  "user_id": "your_demo_user_id",
+  "password": "your_demo_password",
+  "url": "wss://ws.xtb.com/demo",
+  "stream_url": "wss://ws.xtb.com/demoStream"
+}

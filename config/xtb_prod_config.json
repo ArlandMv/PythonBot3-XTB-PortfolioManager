@@ -1,0 +1,6 @@
+{
+  "username": "your_prod_username",
+  "password": "your_prod_password",
+  "url": "wss://ws.xtb.com/real",
+  "stream_url": "wss://ws.xtb.com/realStream"
+}
