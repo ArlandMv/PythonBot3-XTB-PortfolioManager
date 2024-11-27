@@ -1,3 +1,4 @@
+```plaintext
 xtb_bot/
 ├── logs/                         # Logs directory (subdirectories created by logger dynamically)
 │   └── YYYY-MM/                  # Monthly folders for logs
@@ -29,3 +30,4 @@ xtb_bot/
 ├── requirements.txt              # Python dependencies
 ├── .gitignore                    # Git ignore rules
 └── DEV_PLAN.md                   # Development plan and roadmap
+```
