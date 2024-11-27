@@ -1,0 +1,115 @@
+2024-11-27 11:53:53,564 - xtb_api - INFO - Testing invalid credentials.
+2024-11-27 11:53:53,564 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 11:53:54,469 - xtb_api - INFO - Connection established successfully.
+2024-11-27 11:53:54,469 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 11:53:54,778 - xtb_api - ERROR - Login failed: {'status': False, 'errorCode': 'BE005', 'errorDescr': 'userPasswordCheck: Invalid login or password'}
+2024-11-27 11:53:54,778 - xtb_api - ERROR - Error during login: Login failed.
+2024-11-27 11:53:54,779 - xtb_api - ERROR - Error during invalid credentials test: Login failed.
+2024-11-27 11:53:54,779 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 11:53:55,906 - xtb_api - INFO - Connection established successfully.
+2024-11-27 11:53:55,906 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 11:53:56,471 - xtb_api - INFO - Login successful.
+2024-11-27 11:53:56,471 - xtb_api - ERROR - Error during login: 'XTBApiClient' object has no attribute 'stream_session_id'
+2024-11-27 11:53:56,471 - xtb_api - ERROR - XTB BOT: An error occurred: 'XTBApiClient' object has no attribute 'stream_session_id'
+2024-11-27 11:53:56,472 - xtb_api - INFO - Logging out and closing connection.
+2024-11-27 11:53:56,727 - xtb_api - INFO - Logged out successfully.
+2024-11-27 11:53:56,730 - xtb_api - INFO - Connection closed.
+2024-11-27 11:55:34,164 - xtb_api - INFO - Testing invalid credentials.
+2024-11-27 11:55:34,164 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 11:55:35,201 - xtb_api - INFO - Connection established successfully.
+2024-11-27 11:55:35,202 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 11:55:35,428 - xtb_api - ERROR - Login failed: {'status': False, 'errorCode': 'BE005', 'errorDescr': 'userPasswordCheck: Invalid login or password'}
+2024-11-27 11:55:35,428 - xtb_api - ERROR - Error during login: Login failed.
+2024-11-27 11:55:35,428 - xtb_api - ERROR - Error during invalid credentials test: Login failed.
+2024-11-27 11:55:35,428 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 11:55:36,525 - xtb_api - INFO - Connection established successfully.
+2024-11-27 11:55:36,525 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 11:55:36,979 - xtb_api - INFO - Login successful.
+2024-11-27 11:55:36,979 - xtb_api - INFO - Fetching all symbols with 'currencyPair' set to True.
+2024-11-27 11:55:41,766 - xtb_api - INFO - 70 pairs retrieved: ['CHFNOK', 'NOKSEK', 'EURAUD', 'AUDNZD', 'GBPMXN', 'USDINR', 'GBPSEK', 'GBPJPY', 'USDSEK', 'ZARJPY', 'EURJPY', 'EURMXN', 'CHFPLN', 'USDJPY', 'USDCOP', 'USDILS', 'USDMXN', 'EURZAR', 'AUDJPY', 'GBPCAD', 'GBPNZD', 'AUDCHF', 'NZDUSD', 'EURRON', 'USDZAR', 'NZDCHF', 'EURSEK', 'USDCLP', 'CHFSEK', 'USDSGD', 'NZDSGD', 'CHFJPY', 'GBPAUD', 'GBPCHF', 'EURNOK', 'GBPPLN', 'CADMXN', 'USDCHF', 'CADJPY', 'USDTRY', 'GBPUSD', 'EURCZK', 'EURCNH', 'USDNOK', 'EURCHF', 'USDHUF', 'EURHUF', 'GBPSGD', 'GBPZAR', 'USDTHB', 'AUDUSD', 'USDPLN', 'USDCZK', 'USDCNH', 'EURSGD', 'NZDJPY', 'EURNZD', 'EURCAD', 'EURGBP', 'USDRON', 'EURUSD', 'EURPLN', 'CHFHUF', 'GBPNOK', 'CADCHF', 'EURTRY', 'AUDCAD', 'USDBRL', 'USDCAD', 'NZDCAD']
+2024-11-27 11:55:41,772 - xtb_api - INFO - Currency Pairs: ['CHFNOK', 'NOKSEK', 'EURAUD', 'AUDNZD', 'GBPMXN', 'USDINR', 'GBPSEK', 'GBPJPY', 'USDSEK', 'ZARJPY', 'EURJPY', 'EURMXN', 'CHFPLN', 'USDJPY', 'USDCOP', 'USDILS', 'USDMXN', 'EURZAR', 'AUDJPY', 'GBPCAD', 'GBPNZD', 'AUDCHF', 'NZDUSD', 'EURRON', 'USDZAR', 'NZDCHF', 'EURSEK', 'USDCLP', 'CHFSEK', 'USDSGD', 'NZDSGD', 'CHFJPY', 'GBPAUD', 'GBPCHF', 'EURNOK', 'GBPPLN', 'CADMXN', 'USDCHF', 'CADJPY', 'USDTRY', 'GBPUSD', 'EURCZK', 'EURCNH', 'USDNOK', 'EURCHF', 'USDHUF', 'EURHUF', 'GBPSGD', 'GBPZAR', 'USDTHB', 'AUDUSD', 'USDPLN', 'USDCZK', 'USDCNH', 'EURSGD', 'NZDJPY', 'EURNZD', 'EURCAD', 'EURGBP', 'USDRON', 'EURUSD', 'EURPLN', 'CHFHUF', 'GBPNOK', 'CADCHF', 'EURTRY', 'AUDCAD', 'USDBRL', 'USDCAD', 'NZDCAD']
+2024-11-27 11:55:41,772 - xtb_api - INFO - Fetching data for symbol: USDCLP.
+2024-11-27 11:55:41,994 - xtb_api - INFO - Retrieved data for symbol: USDCLP
+2024-11-27 11:55:41,995 - xtb_api - INFO - USDCLP Data: {'symbol': 'USDCLP', 'currency': 'USD', 'categoryName': 'FX', 'currencyProfit': 'CLP', 'quoteId': 5, 'quoteIdCross': 4, 'marginMode': 101, 'profitMode': 5, 'pipsPrecision': 2, 'contractSize': 100000, 'exemode': 1, 'time': 1732719330393, 'expiration': None, 'stopsLevel': 0, 'precision': 2, 'swapType': 3, 'stepRuleId': 3, 'type': 1102, 'instantMaxVolume': 2147483647, 'groupName': 'Emergings', 'description': 'American Dollar to Chilean Peso', 'longOnly': False, 'trailingEnabled': True, 'marginHedgedStrong': False, 'swapEnable': True, 'percentage': 100.0, 'bid': 973.87, 'ask': 974.32, 'high': 975.87, 'low': 972.43, 'lotMin': 0.01, 'lotMax': 100.0, 'lotStep': 0.01, 'tickSize': 0.01, 'tickValue': 1000.0, 'swapLong': 0.008073, 'swapShort': -0.015009, 'leverage': 5.0, 'spreadRaw': 0.45, 'spreadTable': 45.0, 'starting': None, 'swap_rollover3days': 0, 'marginMaintenance': 0, 'marginHedged': 0, 'initialMargin': 0, 'timeString': 'Wed Nov 27 15:55:30 CET 2024', 'shortSelling': True, 'currencyPair': True}
+2024-11-27 11:55:41,995 - xtb_api - INFO - Fetching data for symbol: EURUSD.
+2024-11-27 11:55:42,219 - xtb_api - INFO - Retrieved data for symbol: EURUSD
+2024-11-27 11:55:42,220 - xtb_api - INFO - EURUSD Data: {'symbol': 'EURUSD', 'currency': 'EUR', 'categoryName': 'FX', 'currencyProfit': 'USD', 'quoteId': 5, 'quoteIdCross': 4, 'marginMode': 101, 'profitMode': 5, 'pipsPrecision': 4, 'contractSize': 100000, 'exemode': 1, 'time': 1732719342152, 'expiration': None, 'stopsLevel': 0, 'precision': 5, 'swapType': 3, 'stepRuleId': 5, 'type': 971, 'instantMaxVolume': 2147483647, 'groupName': 'Major', 'description': 'Euro to American Dollar', 'longOnly': False, 'trailingEnabled': True, 'marginHedgedStrong': False, 'swapEnable': True, 'percentage': 100.0, 'bid': 1.05484, 'ask': 1.05494, 'high': 1.05785, 'low': 1.04742, 'lotMin': 0.01, 'lotMax': 100.0, 'lotStep': 0.01, 'tickSize': 1e-05, 'tickValue': 1.0, 'swapLong': -0.006723, 'swapShort': 0.00117, 'leverage': 3.33, 'spreadRaw': 0.0001, 'spreadTable': 1.0, 'starting': None, 'swap_rollover3days': 0, 'marginMaintenance': 0, 'marginHedged': 0, 'initialMargin': 0, 'timeString': 'Wed Nov 27 15:55:42 CET 2024', 'shortSelling': True, 'currencyPair': True}
+2024-11-27 11:55:42,220 - xtb_api - INFO - Logging out and closing connection.
+2024-11-27 11:55:42,435 - xtb_api - INFO - Logged out successfully.
+2024-11-27 11:55:42,440 - xtb_api - INFO - Connection closed.
+2024-11-27 11:57:53,478 - xtb_api - INFO - Testing invalid credentials.
+2024-11-27 11:57:53,478 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 11:57:54,462 - xtb_api - INFO - Connection established successfully.
+2024-11-27 11:57:54,463 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 11:57:54,770 - xtb_api - ERROR - Login failed: {'status': False, 'errorCode': 'BE005', 'errorDescr': 'userPasswordCheck: Invalid login or password'}
+2024-11-27 11:57:54,770 - xtb_api - ERROR - Error during login: Login failed.
+2024-11-27 11:57:54,770 - xtb_api - ERROR - Error during invalid credentials test: Login failed.
+2024-11-27 11:57:54,771 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 11:57:55,513 - xtb_api - INFO - Connection established successfully.
+2024-11-27 11:57:55,513 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 11:57:55,768 - xtb_api - INFO - Login successful.
+2024-11-27 11:57:55,769 - xtb_api - INFO - streamSessionId: None
+2024-11-27 11:57:55,769 - xtb_api - INFO - Fetching all symbols with 'currencyPair' set to True.
+2024-11-27 11:58:03,095 - xtb_api - INFO - 70 pairs retrieved: ['CHFNOK', 'NOKSEK', 'EURAUD', 'AUDNZD', 'GBPMXN', 'USDINR', 'GBPSEK', 'GBPJPY', 'USDSEK', 'ZARJPY', 'EURJPY', 'EURMXN', 'CHFPLN', 'USDJPY', 'USDCOP', 'USDILS', 'USDMXN', 'EURZAR', 'AUDJPY', 'GBPCAD', 'GBPNZD', 'AUDCHF', 'NZDUSD', 'EURRON', 'USDZAR', 'NZDCHF', 'EURSEK', 'USDCLP', 'CHFSEK', 'USDSGD', 'NZDSGD', 'CHFJPY', 'GBPAUD', 'GBPCHF', 'EURNOK', 'GBPPLN', 'CADMXN', 'USDCHF', 'CADJPY', 'USDTRY', 'GBPUSD', 'EURCZK', 'EURCNH', 'USDNOK', 'EURCHF', 'USDHUF', 'EURHUF', 'GBPSGD', 'GBPZAR', 'USDTHB', 'AUDUSD', 'USDPLN', 'USDCZK', 'USDCNH', 'EURSGD', 'NZDJPY', 'EURNZD', 'EURCAD', 'EURGBP', 'USDRON', 'EURUSD', 'EURPLN', 'CHFHUF', 'GBPNOK', 'CADCHF', 'EURTRY', 'AUDCAD', 'USDBRL', 'USDCAD', 'NZDCAD']
+2024-11-27 11:58:03,100 - xtb_api - INFO - Currency Pairs: ['CHFNOK', 'NOKSEK', 'EURAUD', 'AUDNZD', 'GBPMXN', 'USDINR', 'GBPSEK', 'GBPJPY', 'USDSEK', 'ZARJPY', 'EURJPY', 'EURMXN', 'CHFPLN', 'USDJPY', 'USDCOP', 'USDILS', 'USDMXN', 'EURZAR', 'AUDJPY', 'GBPCAD', 'GBPNZD', 'AUDCHF', 'NZDUSD', 'EURRON', 'USDZAR', 'NZDCHF', 'EURSEK', 'USDCLP', 'CHFSEK', 'USDSGD', 'NZDSGD', 'CHFJPY', 'GBPAUD', 'GBPCHF', 'EURNOK', 'GBPPLN', 'CADMXN', 'USDCHF', 'CADJPY', 'USDTRY', 'GBPUSD', 'EURCZK', 'EURCNH', 'USDNOK', 'EURCHF', 'USDHUF', 'EURHUF', 'GBPSGD', 'GBPZAR', 'USDTHB', 'AUDUSD', 'USDPLN', 'USDCZK', 'USDCNH', 'EURSGD', 'NZDJPY', 'EURNZD', 'EURCAD', 'EURGBP', 'USDRON', 'EURUSD', 'EURPLN', 'CHFHUF', 'GBPNOK', 'CADCHF', 'EURTRY', 'AUDCAD', 'USDBRL', 'USDCAD', 'NZDCAD']
+2024-11-27 11:58:03,100 - xtb_api - INFO - Fetching data for symbol: USDCLP.
+2024-11-27 11:58:03,321 - xtb_api - INFO - Retrieved data for symbol: USDCLP
+2024-11-27 11:58:03,322 - xtb_api - INFO - USDCLP Data: {'symbol': 'USDCLP', 'currency': 'USD', 'categoryName': 'FX', 'currencyProfit': 'CLP', 'quoteId': 5, 'quoteIdCross': 4, 'marginMode': 101, 'profitMode': 5, 'pipsPrecision': 2, 'contractSize': 100000, 'exemode': 1, 'time': 1732719474626, 'expiration': None, 'stopsLevel': 0, 'precision': 2, 'swapType': 3, 'stepRuleId': 3, 'type': 1102, 'instantMaxVolume': 2147483647, 'groupName': 'Emergings', 'description': 'American Dollar to Chilean Peso', 'longOnly': False, 'trailingEnabled': True, 'marginHedgedStrong': False, 'swapEnable': True, 'percentage': 100.0, 'bid': 973.67, 'ask': 974.12, 'high': 975.87, 'low': 972.43, 'lotMin': 0.01, 'lotMax': 100.0, 'lotStep': 0.01, 'tickSize': 0.01, 'tickValue': 1000.0, 'swapLong': 0.008073, 'swapShort': -0.015009, 'leverage': 5.0, 'spreadRaw': 0.45, 'spreadTable': 45.0, 'starting': None, 'swap_rollover3days': 0, 'marginMaintenance': 0, 'marginHedged': 0, 'initialMargin': 0, 'timeString': 'Wed Nov 27 15:57:54 CET 2024', 'shortSelling': True, 'currencyPair': True}
+2024-11-27 11:58:03,323 - xtb_api - INFO - Fetching data for symbol: EURUSD.
+2024-11-27 11:58:03,589 - xtb_api - INFO - Retrieved data for symbol: EURUSD
+2024-11-27 11:58:03,589 - xtb_api - INFO - EURUSD Data: {'symbol': 'EURUSD', 'currency': 'EUR', 'categoryName': 'FX', 'currencyProfit': 'USD', 'quoteId': 5, 'quoteIdCross': 4, 'marginMode': 101, 'profitMode': 5, 'pipsPrecision': 4, 'contractSize': 100000, 'exemode': 1, 'time': 1732719483326, 'expiration': None, 'stopsLevel': 0, 'precision': 5, 'swapType': 3, 'stepRuleId': 5, 'type': 971, 'instantMaxVolume': 2147483647, 'groupName': 'Major', 'description': 'Euro to American Dollar', 'longOnly': False, 'trailingEnabled': True, 'marginHedgedStrong': False, 'swapEnable': True, 'percentage': 100.0, 'bid': 1.05546, 'ask': 1.05554, 'high': 1.05785, 'low': 1.04742, 'lotMin': 0.01, 'lotMax': 100.0, 'lotStep': 0.01, 'tickSize': 1e-05, 'tickValue': 1.0, 'swapLong': -0.006723, 'swapShort': 0.00117, 'leverage': 3.33, 'spreadRaw': 8e-05, 'spreadTable': 0.8, 'starting': None, 'swap_rollover3days': 0, 'marginMaintenance': 0, 'marginHedged': 0, 'initialMargin': 0, 'timeString': 'Wed Nov 27 15:58:03 CET 2024', 'shortSelling': True, 'currencyPair': True}
+2024-11-27 11:58:03,589 - xtb_api - INFO - Logging out and closing connection.
+2024-11-27 11:58:04,062 - xtb_api - INFO - Logged out successfully.
+2024-11-27 11:58:04,066 - xtb_api - INFO - Connection closed.
+2024-11-27 11:58:42,522 - xtb_api - INFO - Testing invalid credentials.
+2024-11-27 11:58:42,522 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 11:58:43,623 - xtb_api - INFO - Connection established successfully.
+2024-11-27 11:58:43,623 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 11:58:43,959 - xtb_api - ERROR - Login failed: {'status': False, 'errorCode': 'BE005', 'errorDescr': 'userPasswordCheck: Invalid login or password'}
+2024-11-27 11:58:43,959 - xtb_api - ERROR - Error during invalid credentials test: 'traceback' object is not callable
+2024-11-27 11:58:52,127 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 11:58:53,082 - xtb_api - INFO - Connection established successfully.
+2024-11-27 11:58:53,082 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 11:58:53,445 - xtb_api - INFO - Login successful.
+2024-11-27 11:59:16,051 - xtb_api - INFO - streamSessionId: 005056fffeb9ce40-00008064-0096a92c-aaf2315db9e75bd0-086e1e91
+2024-11-27 12:00:34,487 - xtb_api - INFO - Logging out and closing connection.
+2024-11-27 12:00:34,502 - xtb_api - ERROR - Error during logout: Connection to remote host was lost.
+2024-11-27 12:00:34,517 - xtb_api - INFO - Connection closed.
+2024-11-27 12:00:36,769 - xtb_api - INFO - Testing invalid credentials.
+2024-11-27 12:00:36,769 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 12:00:38,103 - xtb_api - INFO - Connection established successfully.
+2024-11-27 12:00:38,103 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 12:00:38,443 - xtb_api - ERROR - Login failed: {'status': False, 'errorCode': 'BE005', 'errorDescr': 'userPasswordCheck: Invalid login or password'}
+2024-11-27 12:00:38,443 - xtb_api - ERROR - Error during invalid credentials test: 'traceback' object is not callable
+2024-11-27 12:00:38,443 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 12:00:39,232 - xtb_api - INFO - Connection established successfully.
+2024-11-27 12:00:39,232 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 12:00:39,531 - xtb_api - INFO - Login successful.
+2024-11-27 12:00:46,453 - xtb_api - INFO - streamSessionId: None
+2024-11-27 12:01:14,978 - xtb_api - INFO - Logging out and closing connection.
+2024-11-27 12:01:15,191 - xtb_api - INFO - Logged out successfully.
+2024-11-27 12:01:15,204 - xtb_api - INFO - Connection closed.
+2024-11-27 12:01:17,091 - xtb_api - INFO - Testing invalid credentials.
+2024-11-27 12:01:17,091 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 12:01:17,972 - xtb_api - INFO - Connection established successfully.
+2024-11-27 12:01:17,972 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 12:01:18,492 - xtb_api - ERROR - Login failed: {'status': False, 'errorCode': 'BE005', 'errorDescr': 'userPasswordCheck: Invalid login or password'}
+2024-11-27 12:01:18,492 - xtb_api - ERROR - Error during login: Login failed.
+2024-11-27 12:01:18,492 - xtb_api - ERROR - Error during invalid credentials test: Login failed.
+2024-11-27 12:01:18,492 - xtb_api - INFO - Attempting to connect to XTB API WebSocket.
+2024-11-27 12:01:19,576 - xtb_api - INFO - Connection established successfully.
+2024-11-27 12:01:19,576 - xtb_api - INFO - Logging in to XTB API.
+2024-11-27 12:01:20,126 - xtb_api - INFO - Login successful.
+2024-11-27 12:01:20,126 - xtb_api - INFO - streamSessionId: 005056fffeb9ce40-00008064-0096b5d9-3e6031c2de0297bf-e73ad73a
+2024-11-27 12:02:02,456 - xtb_api - INFO - Fetching all symbols with 'currencyPair' set to True.
+2024-11-27 12:02:18,408 - xtb_api - INFO - 70 pairs retrieved: ['CHFNOK', 'NOKSEK', 'EURAUD', 'AUDNZD', 'GBPMXN', 'USDINR', 'GBPSEK', 'GBPJPY', 'USDSEK', 'ZARJPY', 'EURJPY', 'EURMXN', 'CHFPLN', 'USDJPY', 'USDCOP', 'USDILS', 'USDMXN', 'EURZAR', 'AUDJPY', 'GBPCAD', 'GBPNZD', 'AUDCHF', 'NZDUSD', 'EURRON', 'USDZAR', 'NZDCHF', 'EURSEK', 'USDCLP', 'CHFSEK', 'USDSGD', 'NZDSGD', 'CHFJPY', 'GBPAUD', 'GBPCHF', 'EURNOK', 'GBPPLN', 'CADMXN', 'USDCHF', 'CADJPY', 'USDTRY', 'GBPUSD', 'EURCZK', 'EURCNH', 'USDNOK', 'EURCHF', 'USDHUF', 'EURHUF', 'GBPSGD', 'GBPZAR', 'USDTHB', 'AUDUSD', 'USDPLN', 'USDCZK', 'USDCNH', 'EURSGD', 'NZDJPY', 'EURNZD', 'EURCAD', 'EURGBP', 'USDRON', 'EURUSD', 'EURPLN', 'CHFHUF', 'GBPNOK', 'CADCHF', 'EURTRY', 'AUDCAD', 'USDBRL', 'USDCAD', 'NZDCAD']
+2024-11-27 12:02:29,241 - xtb_api - INFO - Currency Pairs: ['CHFNOK', 'NOKSEK', 'EURAUD', 'AUDNZD', 'GBPMXN', 'USDINR', 'GBPSEK', 'GBPJPY', 'USDSEK', 'ZARJPY', 'EURJPY', 'EURMXN', 'CHFPLN', 'USDJPY', 'USDCOP', 'USDILS', 'USDMXN', 'EURZAR', 'AUDJPY', 'GBPCAD', 'GBPNZD', 'AUDCHF', 'NZDUSD', 'EURRON', 'USDZAR', 'NZDCHF', 'EURSEK', 'USDCLP', 'CHFSEK', 'USDSGD', 'NZDSGD', 'CHFJPY', 'GBPAUD', 'GBPCHF', 'EURNOK', 'GBPPLN', 'CADMXN', 'USDCHF', 'CADJPY', 'USDTRY', 'GBPUSD', 'EURCZK', 'EURCNH', 'USDNOK', 'EURCHF', 'USDHUF', 'EURHUF', 'GBPSGD', 'GBPZAR', 'USDTHB', 'AUDUSD', 'USDPLN', 'USDCZK', 'USDCNH', 'EURSGD', 'NZDJPY', 'EURNZD', 'EURCAD', 'EURGBP', 'USDRON', 'EURUSD', 'EURPLN', 'CHFHUF', 'GBPNOK', 'CADCHF', 'EURTRY', 'AUDCAD', 'USDBRL', 'USDCAD', 'NZDCAD']
+2024-11-27 12:02:29,241 - xtb_api - INFO - Fetching data for symbol: USDCLP.
+2024-11-27 12:02:29,572 - xtb_api - INFO - Retrieved data for symbol: USDCLP
+2024-11-27 12:02:29,572 - xtb_api - INFO - USDCLP Data: {'symbol': 'USDCLP', 'currency': 'USD', 'categoryName': 'FX', 'currencyProfit': 'CLP', 'quoteId': 5, 'quoteIdCross': 4, 'marginMode': 101, 'profitMode': 5, 'pipsPrecision': 2, 'contractSize': 100000, 'exemode': 1, 'time': 1732719748365, 'expiration': None, 'stopsLevel': 0, 'precision': 2, 'swapType': 3, 'stepRuleId': 3, 'type': 1102, 'instantMaxVolume': 2147483647, 'groupName': 'Emergings', 'description': 'American Dollar to Chilean Peso', 'longOnly': False, 'trailingEnabled': True, 'marginHedgedStrong': False, 'swapEnable': True, 'percentage': 100.0, 'bid': 975.07, 'ask': 975.52, 'high': 975.87, 'low': 972.43, 'lotMin': 0.01, 'lotMax': 100.0, 'lotStep': 0.01, 'tickSize': 0.01, 'tickValue': 1000.0, 'swapLong': 0.008073, 'swapShort': -0.015009, 'leverage': 5.0, 'spreadRaw': 0.45, 'spreadTable': 45.0, 'starting': None, 'swap_rollover3days': 0, 'marginMaintenance': 0, 'marginHedged': 0, 'initialMargin': 0, 'timeString': 'Wed Nov 27 16:02:28 CET 2024', 'shortSelling': True, 'currencyPair': True}
+2024-11-27 12:02:29,572 - xtb_api - INFO - Fetching data for symbol: EURUSD.
+2024-11-27 12:02:29,935 - xtb_api - INFO - Retrieved data for symbol: EURUSD
+2024-11-27 12:02:29,936 - xtb_api - INFO - EURUSD Data: {'symbol': 'EURUSD', 'currency': 'EUR', 'categoryName': 'FX', 'currencyProfit': 'USD', 'quoteId': 5, 'quoteIdCross': 4, 'marginMode': 101, 'profitMode': 5, 'pipsPrecision': 4, 'contractSize': 100000, 'exemode': 1, 'time': 1732719749682, 'expiration': None, 'stopsLevel': 0, 'precision': 5, 'swapType': 3, 'stepRuleId': 5, 'type': 971, 'instantMaxVolume': 2147483647, 'groupName': 'Major', 'description': 'Euro to American Dollar', 'longOnly': False, 'trailingEnabled': True, 'marginHedgedStrong': False, 'swapEnable': True, 'percentage': 100.0, 'bid': 1.05435, 'ask': 1.05443, 'high': 1.05785, 'low': 1.04742, 'lotMin': 0.01, 'lotMax': 100.0, 'lotStep': 0.01, 'tickSize': 1e-05, 'tickValue': 1.0, 'swapLong': -0.006723, 'swapShort': 0.00117, 'leverage': 3.33, 'spreadRaw': 8e-05, 'spreadTable': 0.8, 'starting': None, 'swap_rollover3days': 0, 'marginMaintenance': 0, 'marginHedged': 0, 'initialMargin': 0, 'timeString': 'Wed Nov 27 16:02:29 CET 2024', 'shortSelling': True, 'currencyPair': True}
+2024-11-27 12:02:29,936 - xtb_api - INFO - Logging out and closing connection.
+2024-11-27 12:02:30,281 - xtb_api - INFO - Logged out successfully.
+2024-11-27 12:02:30,312 - xtb_api - INFO - Connection closed.

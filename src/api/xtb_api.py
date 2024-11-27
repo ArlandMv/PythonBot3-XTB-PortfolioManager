@@ -1,6 +1,6 @@
 import websocket
+from websocket import create_connection, WebSocketConnectionClosedException
 import json
-import logging
 from time import sleep
 from config.logger import setup_logger
 
@@ -11,11 +11,11 @@ app_name = "XTB BOT"
 # Hardcoded configuration for testing
 DEMO_URL = "wss://ws.xtb.com/demo"
 DEMO_STREAM_URL = "wss://ws.xtb.com/demoStream"
-DEMO_USER_ID = "your test user ID"  # Replace with your test user ID
-DEMO_PASSWORD = "your test password"  # Replace with your test password
+DEMO_USER_ID = "17101549"  # Replace with your test user ID
+DEMO_PASSWORD = "1wm.brokerXTB"  # Replace with your test password
 
 class XTBApiClient:
-    def __init__(self, base_url, stream_url, user_id, password):
+    def __init__(self, base_url, stream_url, user_id, password, max_retries=3, retry_delay=5):
         """
         Initialize the XTB API Client.
         """
@@ -26,29 +26,62 @@ class XTBApiClient:
         self.ws = None
         self.connected = False
         self.stream_session_id = None
+        self.max_retries = max_retries
+        self.retry_delay = retry_delay
 
     def connect(self):
         """
         Establish WebSocket connection to the XTB API.
         """
-        logger.info("Attempting to connect to XTB API WebSocket.")
+        retries = 0
+        while retries < self.max_retries:
+            try:
+                logger.info("Attempting to connect to XTB API WebSocket.")
+                #self.ws = websocket.WebSocket()
+                #self.ws.connect(self.base_url)
+                self.ws = create_connection(self.base_url, timeout=10)
+                self.connected = True
+                logger.info("Connection established successfully.")
+                return
+            except (ConnectionError, WebSocketConnectionClosedException) as e:
+                retries += 1
+                logger.error(f"Connection attempt {retries}/{self.max_retries} failed: {e}")
+                sleep(self.retry_delay)
+
+            logger.error("Max retries reached. Unable to connect to XTB API.")
+            raise ConnectionError("Failed to connect to XTB API after retries.")
+
+    def disconnect(self):
+        if self.ws:
+            try:
+                logger.info("Closing connection.")
+                self.ws.close()
+                self.connected = False
+            except Exception as e:
+                logger.error(f"Error during disconnect: {e}")
+
+    def check_connection(self):
+        """
+        Ensure the WebSocket connection is active.
+        """
+        if not self.connected:
+            logger.error("WebSocket is not connected.")
+            raise ConnectionError("WebSocket is not connected.")
+
+    def monitor_connection(self):
+        self.check_connection()
         try:
-            self.ws = websocket.WebSocket()
-            self.ws.connect(self.base_url)
-            self.connected = True
-            logger.info("Connection established successfully.")
-        except Exception as e:
-            logger.error(f"Error connecting to WebSocket: {e}")
-            self.connected = False
-            raise
+            logger.info("Monitoring WebSocket connection.")
+            self.ws.ping()  # Example of sending a heartbeat if supported
+        except WebSocketConnectionClosedException:
+            logger.error("WebSocket connection lost. Reconnecting...")
+            self.connect()
 
     def login(self):
         """
         Login to the XTB API using user ID and password.
         """
-        if not self.connected:
-            logger.error("Cannot login, WebSocket is not connected.")
-            raise ConnectionError("WebSocket is not connected.")
+        self.check_connection()
 
         logger.info("Logging in to XTB API.")
         login_request = {
@@ -66,8 +99,9 @@ class XTBApiClient:
             response = json.loads(self.ws.recv())
             if response.get("status"):
                 #self.stream_session_id = response["streamSessionId"]
+                self.stream_session_id = response.get("streamSessionId")
                 logger.info("Login successful.")
-                logger.debug(f"streamSessionId: {self.stream_session_id}")
+                logger.info(f"streamSessionId: {self.stream_session_id}")
             else:
                 logger.error(f"Login failed: {response}")
                 raise Exception("Login failed.")
@@ -79,9 +113,7 @@ class XTBApiClient:
         """
         Retrieve all symbols that are currency pairs.
         """
-        if not self.connected:
-            logger.error("Cannot fetch symbols, WebSocket is not connected.")
-            raise ConnectionError("WebSocket is not connected.")
+        self.check_connection()
 
         logger.info("Fetching all symbols with 'currencyPair' set to True.")
         symbols_request = {"command": "getAllSymbols"}
@@ -108,9 +140,7 @@ class XTBApiClient:
         """
         Retrieve data for the specified symbol from the XTB API.
         """
-        if not self.connected:
-            logger.error("Cannot retrieve symbol data, WebSocket is not connected.")
-            raise ConnectionError("WebSocket is not connected.")
+        self.check_connection()
 
         logger.info(f"Fetching data for symbol: {symbol}.")
         symbol_request = {
@@ -138,9 +168,7 @@ class XTBApiClient:
         """
         Logout from the XTB API and close the WebSocket connection.
         """
-        if not self.connected:
-            logger.error("Cannot logout, WebSocket is not connected.")
-            raise ConnectionError("WebSocket is not connected.")
+        self.check_connection()
 
         logger.info("Logging out and closing connection.")
         logout_request = {"command": "logout"}
@@ -154,9 +182,7 @@ class XTBApiClient:
         except Exception as e:
             logger.error(f"Error during logout: {e}")
         finally:
-            self.ws.close()
-            self.connected = False
-            logger.info("Connection closed.")
+            self.disconnect()
 
 # Example usage for testing
 if __name__ == "__main__":
@@ -179,10 +205,9 @@ if __name__ == "__main__":
         logger.info(f"Currency Pairs: {currency_pairs}")
         usdclp_data = api_client.get_symbol_data()
         logger.info(f"USDCLP Data: {usdclp_data}")
-        eurusd_data = api_client.get_symbol_data("EURUSD")
-        logger.info(f"EURUSD Data: {eurusd_data}")
+        #eurusd_data = api_client.get_symbol_data("EURUSD")
+        #logger.info(f"EURUSD Data: {eurusd_data}")
     except Exception as e:
         logger.error(f"{app_name}: An error occurred: {e}")
     finally:
-        # logger.info("COMMENTED:Logging out and closing connection")
         api_client.logout()
