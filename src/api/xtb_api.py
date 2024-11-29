@@ -1,8 +1,10 @@
-import websocket
+from datetime import datetime
+# import websocket
 from websocket import create_connection, WebSocketConnectionClosedException
 import json
-from time import sleep
+from time import sleep, time
 from config.logger import setup_logger
+from src.api.xtb_api_utils import XtbApiUtils
 
 # Initialize logger
 logger = setup_logger("xtb_api")
@@ -12,7 +14,7 @@ app_name = "XTB BOT"
 DEMO_URL = "wss://ws.xtb.com/demo"
 DEMO_STREAM_URL = "wss://ws.xtb.com/demoStream"
 DEMO_USER_ID = "17101549"  # Replace with your test user ID
-DEMO_PASSWORD = "1wm.brokerXTB"  # Replace with your test password
+DEMO_PASSWORD = "p@5R{(&Wezx;*SFhBX.^b9"  # Replace with your test password
 
 class XTBApiClient:
     def __init__(self, base_url, stream_url, user_id, password, max_retries=3, retry_delay=5):
@@ -28,7 +30,8 @@ class XTBApiClient:
         self.stream_session_id = None
         self.max_retries = max_retries
         self.retry_delay = retry_delay
-
+        self.exec_start = XtbApiUtils.get_time() #milliseconds
+        logger.info(f"XTB API Client initialized at {XtbApiUtils.milliseconds_to_string(self.exec_start)}.")
     def connect(self):
         """
         Establish WebSocket connection to the XTB API.
@@ -69,6 +72,9 @@ class XTBApiClient:
             raise ConnectionError("WebSocket is not connected.")
 
     def monitor_connection(self):
+        """
+        UNTESTED.
+        """
         self.check_connection()
         try:
             logger.info("Monitoring WebSocket connection.")
@@ -108,6 +114,26 @@ class XTBApiClient:
         except Exception as e:
             logger.error(f"Error during login: {e}")
             raise
+
+    def logout(self):
+        """
+        Logout from the XTB API and close the WebSocket connection.
+        """
+        self.check_connection()
+
+        logger.info("Logging out and closing connection.")
+        logout_request = {"command": "logout"}
+        try:
+            self.ws.send(json.dumps(logout_request))
+            response = json.loads(self.ws.recv())
+            if response.get("status"):
+                logger.info("Logged out successfully.")
+            else:
+                logger.error(f"Error during logout: {response}")
+        except Exception as e:
+            logger.error(f"Error during logout: {e}")
+        finally:
+            self.disconnect()
 
     def get_all_currency_pairs(self):
         """
@@ -164,25 +190,98 @@ class XTBApiClient:
             logger.error(f"Error fetching symbol data: {e}")
             raise
 
-    def logout(self):
+    def get_server_time(self):
         """
-        Logout from the XTB API and close the WebSocket connection.
+        Returns current time on trading server.
+
+        Time described in form set on server (local time of server)
+
+        ex: "returnData": {
+           		"time": 1392211379731,
+           		"timeString": "Feb 12, 2014 2:22:59 PM" }
+        """
+        self.check_connection()
+        logger.info("Fetching server time.")
+        symbol_request = {"command": "getServerTime"}
+
+        try:
+            self.ws.send(json.dumps(symbol_request))
+            response = json.loads(self.ws.recv())
+            if response.get("status"):
+                time_data = response.get("returnData", {})
+                logger.info(f"Retrieved time: {time_data['timeString']}")
+                return time_data['time']
+            else:
+                logger.error(f"Error retrieving TradingHours data: {response}")
+                return {}
+        except Exception as e:
+            logger.error(f"Error fetching server time: {e}")
+            raise
+
+    def get_trading_hours(self, symbol="USDCLP"):
+        """
+        Retrieve quotes and trading times.
         """
         self.check_connection()
 
-        logger.info("Logging out and closing connection.")
-        logout_request = {"command": "logout"}
+        logger.info(f"Fetching TradingHours for symbol: {symbol}.")
+        symbol_request = {
+            "command": "getTradingHours",
+            "arguments": {
+                "symbols": [symbol]
+            }
+        }
+
         try:
-            self.ws.send(json.dumps(logout_request))
+            self.ws.send(json.dumps(symbol_request))
             response = json.loads(self.ws.recv())
             if response.get("status"):
-                logger.info("Logged out successfully.")
+                symbol_data = response.get("returnData", {})
+                logger.info(f"Retrieved data for symbol: {symbol}")
+                return symbol_data
             else:
-                logger.error(f"Error during logout: {response}")
+                logger.error(f"Error retrieving TradingHours data: {response}")
+                return {}
         except Exception as e:
-            logger.error(f"Error during logout: {e}")
-        finally:
-            self.disconnect()
+            logger.error(f"Error fetching TradingHours data: {e}")
+            raise
+
+# TRADING_LOGIC FUNCTIONS
+
+
+    def check_market_status(self, symbol="USDCLP"):
+        """
+        Validate if the market is open for the given symbol.
+        """
+        self.check_connection()
+
+        server_time_ms = self.get_server_time()
+        trading_hours = self.get_trading_hours(symbol)
+        # quotes[], symbol[]
+
+        logger.info(f"Fetching TradingHours for symbol: {symbol}.")
+        symbol_request = {
+            "command": "getSymbol",
+            "arguments": {
+                "symbols": [symbol]
+            }
+        }
+
+        try:
+            self.ws.send(json.dumps(symbol_request))
+            response = json.loads(self.ws.recv())
+            if response.get("status"):
+                symbol_data = response.get("returnData", {})
+                logger.info(f"Retrieved data for symbol: {symbol}")
+                return symbol_data
+            else:
+                logger.error(f"Error retrieving TradingHours data: {response}")
+                return {}
+        except Exception as e:
+            logger.error(f"Error fetching TradingHours data: {e}")
+            raise
+
+
 
 # Example usage for testing
 if __name__ == "__main__":
@@ -191,8 +290,8 @@ if __name__ == "__main__":
     bad_api_client = XTBApiClient(DEMO_URL, DEMO_STREAM_URL, DEMO_USER_ID, BAD_PASSWORD)
     try:
         logger.info("Testing invalid credentials.")
-        bad_api_client.connect()
-        bad_api_client.login()
+        #bad_api_client.connect()
+        #bad_api_client.login()
     except Exception as e:
         logger.error(f"Error during invalid credentials test: {e}")
 
@@ -201,8 +300,49 @@ if __name__ == "__main__":
     try:
         api_client.connect()
         api_client.login()
-        currency_pairs = api_client.get_all_currency_pairs()
-        logger.info(f"Currency Pairs: {currency_pairs}")
+
+        #CHECK MARKET STATUS
+        server_time_ms = api_client.get_server_time()
+        #trading_hours = api_client.get_trading_hours()
+        #logger.info(trading_hours)
+        fromT = 45000000 #12:30 PM
+        toT = 63900000 #5:45 PM
+
+        logger.info(f"From: {XtbApiUtils.ms_to_time_of_day(fromT)}")  # Output: From: 12:30:00
+        logger.info(f"To: {XtbApiUtils.ms_to_time_of_day(toT)}")  # Output: To: 17:45:00
+
+        server_time_dt = XtbApiUtils.ms_to_datetime(server_time_ms)
+
+        logger.info(f"To: {server_time_dt}")
+
+        server_time_of_day = server_time_dt.hour * 3600000 + \
+                             server_time_dt.minute * 60000 + \
+                             server_time_dt.second * 1000
+        #MS TO HOURS
+
+        if (fromT <= server_time_of_day <= toT):
+            market = True
+        else:
+            market = False
+        logger.info(f"market:{market}")
+
+        logger.info("LETS GO!")
+
+
+
+
+        # Convert server time to day of week and milliseconds since start of the day
+        server_time_dt = XtbApiUtils.ms_to_datetime(server_time_ms)
+        server_day = server_time_dt.isoweekday()  # ISO: Monday=1, Sunday=7
+        # days 1 to 5 mondays to fridays
+        # "fromT": 45000000, "toT": 63900000
+
+
+
+
+
+        #currency_pairs = api_client.get_all_currency_pairs()
+        #logger.info(f"Currency Pairs: {currency_pairs}")
         usdclp_data = api_client.get_symbol_data()
         logger.info(f"USDCLP Data: {usdclp_data}")
         #eurusd_data = api_client.get_symbol_data("EURUSD")
