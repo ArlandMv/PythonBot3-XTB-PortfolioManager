@@ -1,0 +1,4 @@
+DEMO_URL = "wss://ws.xtb.com/demo"
+DEMO_STREAM_URL = "wss://ws.xtb.com/demoStream"
+DEMO_USER_ID="your_user_id"
+DEMO_PASSWORD="your_password"

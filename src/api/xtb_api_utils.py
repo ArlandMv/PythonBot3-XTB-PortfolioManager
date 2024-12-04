@@ -7,43 +7,46 @@ from config.logger import setup_logger
 # Initialize logger
 logger = setup_logger("xtb_api_utils")
 
+def get_time() -> int:
+    """
+    Description: Get the current local time as a timestamp in milliseconds.
+    Use: (future) time calculations or logging execution time.
+    """
+    return int(time.time() * 1000)
+
+def ms_to_datetime(ms: int) -> datetime:
+    """
+    Description: Format milliseconds to datetime.
+    Use: logs and debugs ? - [ ]
+    """
+    return datetime.fromtimestamp(ms / 1000.0)
+
+def milliseconds_to_string(ms):
+    """Format a datetime object into a readable string."""
+    ms_datetime = datetime.fromtimestamp(ms / 1000.0) #ms_datetime
+    return ms_datetime.strftime("%Y-%m-%d %H:%M:%S")
+
+def timestamp_to_datetimeISO(timestamp):
+    """
+    Convert a timestamp (milliseconds since epoch) to an ISO 8601 formatted string.
+    Args: timestamp (int): Timestamp in milliseconds.
+    Returns: Human-readable datetime in ISO format.
+    """
+    try:
+       dt = datetime.fromtimestamp(timestamp / 1000).isoformat()
+       return dt
+    except Exception as e:
+       logger.error(f"Error converting timestamp {timestamp} to datetime: {e}")
+       return None
+
+
+def calculate_response_time(start_time: int, end_time: int) -> int:
+    """Calculate the response time in milliseconds."""
+    response_time = end_time - start_time
+    logger.info(f"Response time: {response_time} ms")
+    return response_time
+
 class XtbApiUtils:
-    @staticmethod
-    def get_time():
-        """
-        Get the current local time as a timestamp in milliseconds.
-        Useful for time calculations or logging execution time.
-        """
-        return int(time.time() * 1000)
-
-    @staticmethod
-    def ms_to_datetime(ms):
-        """Format milliseconds to datetime."""
-        return datetime.fromtimestamp(ms / 1000.0)
-
-    @staticmethod
-    def milliseconds_to_string(ms):
-        """Format a datetime object into a readable string."""
-        time = datetime.fromtimestamp(ms / 1000.0) #ms_datetime
-        return time.strftime("%Y-%m-%d %H:%M:%S")
-
-    @staticmethod
-    def timestamp_to_datetimeISO(timestamp):
-        """
-        Convert a timestamp (milliseconds since epoch) to a human-readable datetime.
-
-        Args:
-            timestamp (int): Timestamp in milliseconds.
-
-        Returns:
-            str: Human-readable datetime in ISO format.
-        """
-        try:
-            dt = datetime.fromtimestamp(timestamp / 1000).isoformat()
-            return dt
-        except Exception as e:
-            logger.error(f"Error converting timestamp {timestamp} to datetime: {e}")
-            return None
 
     @staticmethod
     def calculate_response_time(start_time, end_time):
@@ -128,4 +131,6 @@ def ms_to_time_object(ms: int) -> time:
     # Format the time as HH:MM:SS
     #return f"{hours:02}:{minutes:02}:{seconds:02}"
     return time(hour=hours, minute=minutes, second=seconds)
+
+
 

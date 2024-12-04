@@ -1,4 +1,4 @@
-extra/
+logs/
 
 # Python cache files
 __pycache__/

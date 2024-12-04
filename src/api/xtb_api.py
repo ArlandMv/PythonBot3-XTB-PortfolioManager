@@ -4,17 +4,21 @@ from websocket import create_connection, WebSocketConnectionClosedException
 import json
 from time import sleep, time
 from config.logger import setup_logger
-from src.api.xtb_api_utils import XtbApiUtils
+from src.api.xtb_api_utils import XtbApiUtils, get_time, milliseconds_to_string, ms_to_datetime, ms_to_time_object
+
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # Initialize logger
 logger = setup_logger("xtb_api")
 app_name = "XTB BOT"
 
-# Hardcoded configuration for testing
-DEMO_URL = "wss://ws.xtb.com/demo"
-DEMO_STREAM_URL = "wss://ws.xtb.com/demoStream"
-DEMO_USER_ID = "17101549"  # Replace with your test user ID
-DEMO_PASSWORD = "p@5R{(&Wezx;*SFhBX.^b9"  # Replace with your test password
+# configuration for testing
+DEMO_URL = os.getenv("DEMO_URL")
+DEMO_STREAM_URL = os.getenv("DEMO_STREAM_URL")
+DEMO_USER_ID = os.getenv("DEMO_USER_ID")
+DEMO_PASSWORD = os.getenv("DEMO_PASSWORD")
 
 class XTBApiClient:
     def __init__(self, base_url, stream_url, user_id, password, max_retries=3, retry_delay=5):
@@ -30,8 +34,8 @@ class XTBApiClient:
         self.stream_session_id = None
         self.max_retries = max_retries
         self.retry_delay = retry_delay
-        self.exec_start = XtbApiUtils.get_time() #milliseconds
-        logger.info(f"XTB API Client initialized at {XtbApiUtils.milliseconds_to_string(self.exec_start)}.")
+        self.exec_start = get_time() #milliseconds
+        logger.info(f"XTB API Client initialized at {milliseconds_to_string(self.exec_start)}.")
     def connect(self):
         """
         Establish WebSocket connection to the XTB API.
@@ -248,38 +252,71 @@ class XTBApiClient:
 
 # TRADING_LOGIC FUNCTIONS
 
+    def trade_transaction(self, trade_trans_info: dict) -> dict:
+        """
+        Sends a trade transaction request to the server.
 
-    def check_market_status(self, symbol="USDCLP"):
+        Args:
+            trade_trans_info (dict): Information about the trade transaction (e.g., symbol, volume, price, etc.).
+
+        Returns:
+            dict: The response from the server containing the order number.
+        """
+        payload = {
+            "command": "tradeTransaction",
+            "arguments": {"tradeTransInfo": trade_trans_info},
+        }
+        response = self._send_request(payload)
+        if response.get("status"):
+            return response.get("returnData")
+        else:
+            raise Exception(f"Trade transaction failed: {response}")
+
+    def is_symbol_tradable(self, symbol="USDCLP"):
         """
         Validate if the market is open for the given symbol.
         """
-        self.check_connection()
-
         server_time_ms = self.get_server_time()
         trading_hours = self.get_trading_hours(symbol)
+        if not trading_hours or not trading_hours[0].get("trading"):
+            logger.info(f"Trading hours not available for symbol {symbol}.")
+            return False
         # quotes[], symbol[]
-
-        logger.info(f"Fetching TradingHours for symbol: {symbol}.")
-        symbol_request = {
-            "command": "getSymbol",
-            "arguments": {
-                "symbols": [symbol]
-            }
-        }
-
         try:
-            self.ws.send(json.dumps(symbol_request))
-            response = json.loads(self.ws.recv())
-            if response.get("status"):
-                symbol_data = response.get("returnData", {})
-                logger.info(f"Retrieved data for symbol: {symbol}")
-                return symbol_data
+            logger.info(f"checking market for symbol {symbol}.")
+            server_time_dt = ms_to_datetime(server_time_ms)
+            server_day = server_time_dt.weekday()  # 0=Monday, ..., 6=Sunday
+            trading_periods = [period for period in trading_hours[0]["trading"] if period["day"] == server_day]
+
+            if not trading_periods:
+                logger.warning(f"No trading periods found for symbol {symbol} on day {server_day}.")
+                return False
+
+            # Use the first trading period for today's trading hours
+            fromT = trading_periods[0]["fromT"]
+            toT = trading_periods[0]["toT"]
+
+            # Convert server time to time in milliseconds from midnight
+            server_time_of_day = (
+                    server_time_dt.hour * 3600000 +
+                    server_time_dt.minute * 60000 +
+                    server_time_dt.second * 1000
+            )
+            # Check if the current time is within the trading period
+            if fromT <= server_time_of_day <= toT:
+                #print (from {fromT} to {ms_to_time_object(toT)
+                logger.info(
+                    f"Market for {symbol} is open.")
+                return True
             else:
-                logger.error(f"Error retrieving TradingHours data: {response}")
-                return {}
+                logger.info(f"Market for {symbol} is closed (current time: {server_time_of_day} ms).")
+                return False
+
         except Exception as e:
-            logger.error(f"Error fetching TradingHours data: {e}")
-            raise
+            logger.error(f"Error determining tradability: {e}")
+            return False
+
+
 
 
 
@@ -296,24 +333,21 @@ if __name__ == "__main__":
         logger.error(f"Error during invalid credentials test: {e}")
 
     # Testing valid credentials
-    api_client = XTBApiClient(DEMO_URL, DEMO_STREAM_URL, DEMO_USER_ID, DEMO_PASSWORD)
+    ws_client = XTBApiClient(DEMO_URL, DEMO_STREAM_URL, DEMO_USER_ID, DEMO_PASSWORD)
     try:
-        api_client.connect()
-        api_client.login()
+        ws_client.connect()
+        ws_client.login()
 
         #CHECK MARKET STATUS
-        server_time_ms = api_client.get_server_time()
-        #trading_hours = api_client.get_trading_hours()
+        server_time_ms = ws_client.get_server_time()
+        #trading_hours = ws_client.get_trading_hours()
         #logger.info(trading_hours)
         fromT = 45000000 #12:30 PM
         toT = 63900000 #5:45 PM
 
-        logger.info(f"From: {XtbApiUtils.ms_to_time_of_day(fromT)}")  # Output: From: 12:30:00
-        logger.info(f"To: {XtbApiUtils.ms_to_time_of_day(toT)}")  # Output: To: 17:45:00
+        server_time_dt = ms_to_datetime(server_time_ms)
 
-        server_time_dt = XtbApiUtils.ms_to_datetime(server_time_ms)
-
-        logger.info(f"To: {server_time_dt}")
+        logger.info(f" ServerTime datatime to be converted to server_time_of_day: {server_time_dt}")
 
         server_time_of_day = server_time_dt.hour * 3600000 + \
                              server_time_dt.minute * 60000 + \
@@ -328,26 +362,19 @@ if __name__ == "__main__":
 
         logger.info("LETS GO!")
 
-
-
-
         # Convert server time to day of week and milliseconds since start of the day
-        server_time_dt = XtbApiUtils.ms_to_datetime(server_time_ms)
-        server_day = server_time_dt.isoweekday()  # ISO: Monday=1, Sunday=7
+        # server_time_dt = XtbApiUtils.ms_to_datetime(server_time_ms)
+        # server_day = server_time_dt.isoweekday()  # ISO: Monday=1, Sunday=7
         # days 1 to 5 mondays to fridays
         # "fromT": 45000000, "toT": 63900000
 
-
-
-
-
-        #currency_pairs = api_client.get_all_currency_pairs()
+        #currency_pairs = ws_client.get_all_currency_pairs()
         #logger.info(f"Currency Pairs: {currency_pairs}")
-        usdclp_data = api_client.get_symbol_data()
-        logger.info(f"USDCLP Data: {usdclp_data}")
-        #eurusd_data = api_client.get_symbol_data("EURUSD")
+        #usdclp_data = ws_client.get_symbol_data()
+        #logger.info(f"USDCLP Data: {usdclp_data}")
+        #eurusd_data = ws_client.get_symbol_data("EURUSD")
         #logger.info(f"EURUSD Data: {eurusd_data}")
     except Exception as e:
         logger.error(f"{app_name}: An error occurred: {e}")
     finally:
-        api_client.logout()
+        ws_client.logout()
