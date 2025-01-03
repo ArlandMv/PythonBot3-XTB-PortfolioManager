@@ -1,6 +1,9 @@
 websocket-client
+websocket
 requests
 pandas
 openpyxl
 schedule
+python-dotenv
+python-decouple
 pytest

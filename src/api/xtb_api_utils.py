@@ -132,5 +132,21 @@ def ms_to_time_object(ms: int) -> time:
     #return f"{hours:02}:{minutes:02}:{seconds:02}"
     return time(hour=hours, minute=minutes, second=seconds)
 
+def execute_trade (self, symbol, entry_price, volume, take_profit=None):
+    """
+    Execute a trade with a dynamically calculated stop-loss.
+    """
+    # Calculate stop-loss price dynamically
+    stop_loss_price = self.calculate_stop_loss(entry_price, symbol, volume)
 
-
+    # Use XTB API tradeTransaction
+    trade_response = self.api.trade_transaction(
+        cmd=0,  # Buy (assume a long trade for demonstration)
+        symbol=symbol,
+        volume=volume,
+        price=entry_price,
+        sl=stop_loss_price,
+        tp=take_profit,
+        type_=0  # Open order
+    )
+    return trade_response
